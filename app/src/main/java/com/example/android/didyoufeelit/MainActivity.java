@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Event doInBackground(String... url) {
 
+            // check that the input parameter has at least one string
+            if (url.length < 1 || url[0] == null) {
+                return null;
+            }
+
             // Perform the HTTP request for earthquake data and process the response.
             Event earthquake = Utils.fetchEarthquakeData(url[0]);
             return earthquake;
@@ -68,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Event earthquake) {
+
+            // check that the input parameter exists
+            if (earthquake == null) {
+                return;
+            }
 
             // Update the information displayed to the user.
             updateUi(earthquake);
